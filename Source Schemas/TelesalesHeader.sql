@@ -1,0 +1,65 @@
+-- Database: EXCHCORECPA400 Metadata version: 1 Exported: 19-Feb-2025
+-- Begin Tables
+SET LEGACYTYPESALLOWED = ON;
+-- Begin Multi-Line Statement
+SET TRUENULLCREATE = OFF;CREATE TABLE "TelesalesHeader" USING 'stock\mlocstk.dat' DCOMPRESS PAGESIZE=2048 LINKDUP=3 (
+ "tcIdxRecSub" CHAR(2),
+ "tcIdxCode1" CHAR(30),
+ "tcIdxCode2" CHAR(45),
+ "tcIdxCode3" CHAR(31),
+ "idxAcCode" CHAR(6),
+ "tcDocType" UTINYINT,
+ "tcCurr" UTINYINT,
+ "tcCompanyRate_1" SMALLINT,
+ "tcCompanyRate_2" INTEGER,
+ "tcDailyRate_1" SMALLINT,
+ "tcDailyRate_2" INTEGER,
+ "tcOldYourRef" LSTRING(11),
+ "tcLYRef" LSTRING(21),
+ "tcDepartment" LSTRING(4),
+ "tcCostCentre" LSTRING(4),
+ "tcLocCode" LSTRING(6),
+ "IdxJobCode" CHAR(10),
+ "IdxAnalCode" CHAR(10),
+ "tcDAddr1" LSTRING(31),
+ "tcDAddr2" LSTRING(31),
+ "tcDAddr3" LSTRING(31),
+ "tcDAddr4" LSTRING(31),
+ "tcDAddr5" LSTRING(31),
+ "tcTDate" LSTRING(9),
+ "tcDelDate" LSTRING(9),
+ "tcNetTotal" DOUBLE,
+ "tcVATTotal" DOUBLE,
+ "tcDiscTotal" DOUBLE,
+ "tcLastOpo" LSTRING(11),
+ "tcInProg" LOGICAL,
+ "tcTransNat" UTINYINT,
+ "tcTransMode" UTINYINT,
+ "tcDelTerms" LSTRING(4),
+ "tcCtrlCode" INTEGER,
+ "tcVATCode" CHAR(1),
+ "tcOrdMode" UTINYINT,
+ "tcScaleMode" UTINYINT,
+ "tcLineCount" INTEGER,
+ "tcWasNew" LOGICAL,
+ "tcUseORate" UTINYINT,
+ "tcDefaultGLCode" INTEGER,
+ "tcInclusiveVATCode" CHAR(1),
+ "tcDefSettleDisc" DOUBLE,
+ "tcTransactionType" UTINYINT,
+ "tcTagNo" UTINYINT,
+ "tcLockAddr" INTEGER,
+ "Spare2a" CHAR(158),
+ "Spare2b" CHAR(158),
+ "tcYourRef" LSTRING(21),
+ "tcDeliveryPostCode" LSTRING(21),
+ "tcDeliveryCountry" LSTRING(3),
+ "tcSSDProcess" CHAR(1),
+ "tcSpare1" CHAR(255),
+ "tcSpare2" CHAR(234) );SET TRUENULLCREATE = ON;
+-- End Multi-Line Statement
+CREATE INDEX "tcCode1Idx" USING 0  ON "TelesalesHeader" ( "tcIdxRecSub", "tcIdxCode1" );
+CREATE INDEX "tcCode2Idx" USING 1  ON "TelesalesHeader" ( "tcIdxRecSub", "tcIdxCode2" );
+CREATE INDEX "tcCode3idx" USING 2  ON "TelesalesHeader" ( "tcIdxRecSub", "tcIdxCode3" );
+SET LEGACYTYPESALLOWED = OFF;
+-- End Tables

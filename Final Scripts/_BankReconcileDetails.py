@@ -1,0 +1,92 @@
+import pyodbc
+import csv
+import time
+import re
+
+# Connect to the database (ensure ODBC connection is 32-bit)
+connection = pyodbc.connect("DSN=zen32")
+cursor = connection.cursor()
+
+
+cursor.execute("""
+select brdSpare,
+brdIdxCode1,
+brdSpare1,
+brdIdxCode2,
+brdSpare2,
+brdIdxCode3,
+brdPaymentRefLB,
+brdPaymentRef,
+brdLineDateLB,
+brdLineDate,
+brdMatchingOurRefLB,
+brdMatchingOurRef,
+brdValue,
+brdLineNo,
+brdStatementIDLB,
+brdStatementID,
+brdStatementLineNo,
+brdAcCodeLB,
+brdAcCode,
+brdPeriod,
+brdYear,
+brdCompanyRate_1,
+brdCompanyRate_2,
+brdDailyRate_1,
+brdDailyRate_2,
+brdLUseORate,
+brdTriangulationRate,
+brdTriangulationEuro,
+brdTriangulationInve,
+brdTriangulationFloa,
+brdSpare5,
+brdMatchingYourRefLB,
+brdMatchingYourRef,
+brdTransValue,
+brdDepartmentLB,
+brdDepartment,
+brdCostCentreLB,
+brdCostCentre,
+brdGLCode,
+brdSRIGLCode,
+brdFolio,
+brdVATCode,
+brdVATAmount,
+brdTransDateLB,
+brdTransDate,
+brdIsNewTrans,
+brdLineStatus,
+brdSpare3,
+brdSpare4,
+brdSpare6,
+brdSpare7,
+brdSpare8 from BankReconcileDetails
+""")
+
+# Fetch all results
+rows = cursor.fetchall()
+
+
+
+# Get column names from cursor description
+columns = [column[0] for column in cursor.description]
+
+# Function to clean and convert text to UTF-8
+def clean_text(value):
+    if isinstance(value, str):
+        value = value.encode("ISO-8859-1", errors="ignore").decode("utf-8", errors="ignore")  # Convert to UTF-8
+        value = re.sub(r'[\x00-\x1F\x7F]', '', value)  # Remove control characters
+    return value
+
+# Start CSV writing timer
+csv_start_time = time.time()
+
+# Write results to CSV file
+csv_file = 'BankReconcileDetails_Output_UTF8.csv'
+with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(columns)  # Write header row
+    
+    for row in rows:
+        writer.writerow([clean_text(value) for value in row])  # Write cleaned data rows
+
