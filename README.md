@@ -23,7 +23,7 @@ The CPA Exchequer Data Loader is a Python-based tool designed to automate the ex
 
 ### Usage
 
-1. Ensure all the necessary Python scripts are located in the `Final Scripts` directory.
+1. Ensure all the necessary Python scripts are located in the `TableScripts` directory.
 2. Run the main script to execute all data extraction scripts:
 
 ```sh
