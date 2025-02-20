@@ -9,26 +9,70 @@ cursor = connection.cursor()
 
 
 cursor.execute("""
- select  bmRecType,
- bmIdxRecSub,
- bmSubType,
- IdxStockFolio,
- bmIdxStkLink,
- bmCompOrder,
- bmIdxBillLink,
- bmQtyUsed_1,
- bmQtyUsed_2,
- bmQtyCost_1,
- bmQtyCost_2,
- bmQtyCur,
- IdxStockCode,
- bmFreeIssue,
- bmTime,
- bmSpare from BillOfMaterials
+ 
+select  tcIdxCode1,
+ tcIdxCode2,
+ tcIdxCode3,
+ idxAcCode,
+ tcDocType,
+ tcCurr,
+ tcCompanyRate_1,
+ tcCompanyRate_2,
+ tcDailyRate_1,
+ tcDailyRate_2,
+ tcOldYourRef,
+ --tcLYRef,
+ tcDepartment,
+ --tcCostCentre,
+-- tcLocCode,
+ IdxJobCode,
+ IdxAnalCode,
+ --tcDAddr1,
+ tcDAddr2,
+--tcDAddr3,
+ --tcDAddr4,
+-- tcDAddr5,
+ tcTDate,
+ tcDelDate,
+ tcNetTotal,
+ tcVATTotal,
+ tcDiscTotal,
+ --tcLastOpo,
+ tcInProg,
+ tcTransNat,
+ tcTransMode,
+ --tcDelTerms,
+ tcCtrlCode,
+ tcVATCode,
+ tcOrdMode,
+ tcScaleMode,
+ tcLineCount,
+ tcWasNew,
+ tcUseORate,
+ tcDefaultGLCode,
+ tcInclusiveVATCode,
+ tcDefSettleDisc,
+ tcTransactionType,
+ tcTagNo,
+ tcLockAddr,
+ Spare2a,
+ Spare2b,
+ --tcYourRef,
+ tcDeliveryPostCode,
+ tcDeliveryCountry,
+ tcSSDProcess,
+ tcSpare1,
+ 
+ 
+ 
+ tcSpare2 from TelesalesHeader
+
 """)
 
 # Fetch all results
 rows = cursor.fetchall()
+
+
 
 # Get column names from cursor description
 columns = [column[0] for column in cursor.description]
@@ -44,7 +88,7 @@ def clean_text(value):
 csv_start_time = time.time()
 
 # Write results to CSV file
-csv_file = 'BillOfMaterials_Output_UTF8.csv'
+csv_file = 'TelesalesHeader_Output_UTF8.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(columns)  # Write header row

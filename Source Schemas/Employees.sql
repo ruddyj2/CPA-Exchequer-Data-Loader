@@ -34,7 +34,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "Employees" USING 'jobs\jobmisc.dat' DCOMP
  "emSelfBilling" LOGICAL,
  "emGroupCertificate" LOGICAL,
  "emCertificateType" UTINYINT,
- "emUser3" LSTRING(21),
+ "emUser3" LSTRING(21), 
  "emUser4" LSTRING(21),
  "emNISerialNo" LSTRING(11),
  "emLabourViaPL" LOGICAL,

@@ -22,3 +22,4 @@ CREATE INDEX "jtNameIdx" USING 1  ON "JobTypes" ( "jtIdxRecSub", "jtIdxName" );
 CREATE INDEX "jtSpareIdx" USING 2  ON "JobTypes" ( "jtIdxRecSub", "jtIdxSpare" );
 SET LEGACYTYPESALLOWED = OFF;
 -- End Tables
+ 

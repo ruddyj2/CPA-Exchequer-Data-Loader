@@ -9,26 +9,42 @@ cursor = connection.cursor()
 
 
 cursor.execute("""
- select  bmRecType,
- bmIdxRecSub,
- bmSubType,
+  select 
+ fiRecType,
+ fiIdxRecSub,
+ fiSubType,
+ fiIdxStockFolio,
+ IdxFolio,
+ fiIdxDoc,
+ fiIdxBatchNo,
  IdxStockFolio,
- bmIdxStkLink,
- bmCompOrder,
- bmIdxBillLink,
- bmQtyUsed_1,
- bmQtyUsed_2,
- bmQtyCost_1,
- bmQtyCost_2,
- bmQtyCur,
- IdxStockCode,
- bmFreeIssue,
- bmTime,
- bmSpare from BillOfMaterials
+ IdxLineNo,
+-- fiDate,
+ fiQtyLeft,
+ IdxOurRef,
+ fiQty,
+ fiCost,
+ fiCostCur,
+ IdxAcCode,
+ fiLocation,
+ fiCompanyRate_1,
+ fiCompanyRate_2,
+ fiDailyRate_1,
+ fiDailyRate_2,
+ fiUseORate,
+ fiTriRate,
+ fiTriEuro,
+ fiTriInvert,
+ fiTriFloat,
+ fiTriSpare,
+ fiSpare,
+ fiSpare2 from FIFO
 """)
 
 # Fetch all results
 rows = cursor.fetchall()
+
+
 
 # Get column names from cursor description
 columns = [column[0] for column in cursor.description]
@@ -44,7 +60,7 @@ def clean_text(value):
 csv_start_time = time.time()
 
 # Write results to CSV file
-csv_file = 'BillOfMaterials_Output_UTF8.csv'
+csv_file = 'FIFO_Output_UTF8.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(columns)  # Write header row

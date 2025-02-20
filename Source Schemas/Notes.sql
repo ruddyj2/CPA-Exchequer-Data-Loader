@@ -26,3 +26,4 @@ CREATE INDEX "ntNoteIdx" USING 0  ON "Notes" ( "ntIdxRecSub", "ntIdxNoteKey" );
 CREATE INDEX "ntSpareIdx" USING 1  ON "Notes" ( "ntIdxRecSub", "ntIdxSpare" );
 SET LEGACYTYPESALLOWED = OFF;
 -- End Tables
+ 

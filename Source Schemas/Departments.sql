@@ -19,3 +19,4 @@ CREATE INDEX "dpCodeIdx" USING 0  ON "Departments" ( "dpIdxRecSub", "dpIdxCode" 
 CREATE INDEX "dpDescIdx" USING 1  ON "Departments" ( "dpIdxRecSub", "dpIdxDesc" );
 SET LEGACYTYPESALLOWED = OFF;
 -- End Tables
+ 

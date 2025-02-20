@@ -22,7 +22,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "Locations" USING 'STOCK\MLOCSTK.DAT' DCOM
  "mlModem" LSTRING(26),
  "mlContact" LSTRING(31),
  "mlCurrency" UTINYINT,
- "mlArea" LSTRING(6),
+ "mlArea" LSTRING(6), 
  "mlRep" LSTRING(6),
  "mlTag" LOGICAL,
  "mlSalesGL" INTEGER,

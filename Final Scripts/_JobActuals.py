@@ -9,26 +9,70 @@ cursor = connection.cursor()
 
 
 cursor.execute("""
- select  bmRecType,
- bmIdxRecSub,
- bmSubType,
- IdxStockFolio,
- bmIdxStkLink,
- bmCompOrder,
- bmIdxBillLink,
- bmQtyUsed_1,
- bmQtyUsed_2,
- bmQtyCost_1,
- bmQtyCost_2,
- bmQtyCur,
+ 
+select jaIdxRecSub,
+ jaRecType,
+ jaSubType,
+ jaIdxLedger,
+ jaIdxAnal,
+ jaIdxStock,
+ IdxAnalCode,
+ jaIdxEmp,
+ jaIdxRun,
+ jaIdxLook,
+ jaIdxHed,
+ jaCurrency,
+ jaIdxCrYrPr,
+ jaYear,
+ jaPeriod,
+ jaPosted,
+ IdxFolio,
+ IdxLineNo,
+ jaLineORef,
+ IdxJobCode,
  IdxStockCode,
- bmFreeIssue,
- bmTime,
- bmSpare from BillOfMaterials
+ jaDate,
+ jaQty,
+ jaCost,
+ jaChargeOut,
+ jaInvoiced,
+ jaInvRef,
+ jaEmployee,
+ jaAnalType,
+ jaPostedRun,
+ jaReverse,
+ jaReconTS,
+ jaReversed,
+ joDocType,
+ jaChargeCur,
+ IdxAcCode,
+ jaHold,
+ jaPosted2Stk,
+ jaCompanyRate_1,
+ jaCompanyRate_2,
+ jaDailyRate_1,
+ jaDailyRate_2,
+ jaTagged,
+ jaGLCode,
+ jaUseORate,
+ jaTriRate,
+ jaTriEuro,
+ jaTriInvert,
+ jaTriFloat,
+ jaTriSpare,
+ jaPriceMultiplier,
+ jaUpliftTotal,
+ jaUpliftGL,
+ jaSpare,
+ jaSpare2,
+ jaSpare3 from JobActuals
+
 """)
 
 # Fetch all results
 rows = cursor.fetchall()
+
+
 
 # Get column names from cursor description
 columns = [column[0] for column in cursor.description]
@@ -44,7 +88,7 @@ def clean_text(value):
 csv_start_time = time.time()
 
 # Write results to CSV file
-csv_file = 'BillOfMaterials_Output_UTF8.csv'
+csv_file = 'JobActuals_Output_UTF8.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(columns)  # Write header row

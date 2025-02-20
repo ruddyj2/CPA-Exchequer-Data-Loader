@@ -25,3 +25,4 @@ CREATE INDEX "mpDocIdx" USING 0  ON "MatchedPayments" ( "mpIdxRecSub", "mpIdxDoc
 CREATE INDEX "mpPayIdx" USING 1  ON "MatchedPayments" ( "mpIdxRecSub", "mpIdxPayRef" );
 SET LEGACYTYPESALLOWED = OFF;
 -- End Tables
+ 

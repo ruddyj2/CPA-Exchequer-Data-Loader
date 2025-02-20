@@ -29,7 +29,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "Jobs" USING 'jobs\jobhead.dat' DCOMPRESS 
  "jrUser1" LSTRING(21),
  "jrUser2" LSTRING(21),
  "jrUser3" LSTRING(21),
- "jrUser4" LSTRING(21),
+ "jrUser4" LSTRING(21),   
  "jrDefRetCurr" UTINYINT,
  "jrJPTOurRef" LSTRING(11),
  "jrJSTOurRef" LSTRING(11),

@@ -22,7 +22,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "JobActuals" USING 'jobs\jobdet.dat' DCOMP
  "IdxFolio" INTEGER,
  "IdxLineNo" INTEGER,
  "jaLineORef" CHAR(10),
- "IdxJobCode" CHAR(10),
+ "IdxJobCode" CHAR(10), 
  "IdxStockCode" CHAR(16),
  "jaDate" LSTRING(9),
  "jaQty" DOUBLE,

@@ -1,0 +1,223 @@
+import pyodbc
+import csv
+import time
+import re
+
+# Connect to the database (ensure ODBC connection is 32-bit)
+connection = pyodbc.connect("DSN=zen32")
+cursor = connection.cursor()
+
+
+cursor.execute("""
+ 
+select stStockCode,
+ stIdxStockCode,
+ IdxStockCode,
+ stDesc1,
+ stIdxDesc1,
+ stDesc2,
+ stDesc3,
+ stDesc4,
+ stDesc5,
+ stDesc6,
+ stAltCode,
+ stIdxAltCode,
+ stSuppTemp,
+ stIdxSuppTemp,
+ stSalesGL,
+ stCOSGL,
+ 'stP&LGL',
+ stBalSheetGL,
+ stWIPGL,
+ stReOrderFlag,
+ stMinFlag,
+ idxStockFolio,
+ stStockFolio,
+ stIdxStockCat,
+ stStockCat,
+ stStockType,
+ stUnitOfStock,
+ stUnitOfSale,
+ stUnitOfPurch,
+ stCostPriceCur,
+ stCostPrice_1,
+ stCostPrice_2,
+ stSalesBandACur,
+ stSalesBandAPrice_1,
+ stSalesBandAPrice_2,
+ stSalesBandBCur,
+ stSalesBandBPrice_1,
+ stSalesBandBPrice_2,
+ stSalesBandCCur,
+ stSalesBandCPrice_1,
+ stSalesBandCPrice_2,
+ stSalesBandDCur,
+ stSalesBandDPrice_1,
+ stSalesBandDPrice_2,
+ stSalesBandECur,
+ stSalesBandEPrice_1,
+ stSalesBandEPrice_2,
+ stSalesBandFCur,
+ stSalesBandFPrice_1,
+ stSalesBandFPrice_2,
+ stSalesBandGCur,
+ stSalesBandGPrice_1,
+ stSalesBandGPrice_2,
+ stSalesBandHCur,
+ stSalesBandHPrice_1,
+ stSalesBandHPrice_2,
+ stSalesUnits_1,
+ stSalesUnits_2,
+ stPurchUnits_1,
+ stPurchUnits_2,
+ stVATCode,
+ stDepartment,
+ stCostCentre,
+ stQtyInStock_1,
+ stQtyInStock_2,
+ stQtyPosted_1,
+ stQtyPosted_2,
+ stQtyAllocated_1,
+ stQtyAllocated_2,
+ stQtyOnOrder_1,
+ stQtyOnOrder_2,
+ stQtyMin_1,
+ stQtyMin_2,
+ stQtyMax_1,
+ stQtyMax_2,
+ stReOrderQty_1,
+ stReOrderQty_2,
+ stShowAsKit,
+ stCommodCode,
+ stSaleUnWeight_1,
+ stSaleUnWeight_2,
+ stPurchUnWeight_1,
+ stPurchUnWeight_2,
+ stSSDUnit,
+ stSSDSalesUnit_1,
+ stSSDSalesUnit_2,
+ stBinLocation,
+ stIdxBinLocation,
+ stStkFlag,
+ stCovPr,
+ stCovPrunit,
+ stCovMinPr,
+ stCovMinUnit,
+ IdxSupplier,
+ stSupplier,
+ stQtyFreeze,
+ stCovSold,
+ stUseCover,
+ stCovMaxPr,
+ stCovMaxUnit,
+ stReOrderCur,
+ stReOrderPrice,
+ stRODate,
+ stQtyTake,
+ stStkValType,
+ stHasSerNo,
+ stQtyPicked,
+ stLastUsed,
+ stCalcPack,
+ stJobAnal,
+ stUser1,
+ stUser2,
+ stBarCode,
+ stIdxBarCode,
+ stRODepartment,
+ stROCostCentre,
+ stLocation,
+ stPricePack,
+ stDPackQty,
+ stKitPrice,
+ stKitOnPurch,
+ stDefLineType,
+ stQtyReturn,
+ stQtyAllocWOR,
+ stQtyIssueWOR,
+ stUseForEbus,
+ stWebLiveCatalog,
+ stWebPrevCatalog,
+ stUser3,
+ stUser4,
+ stValSerialAvgCost,
+ stSpare1,
+ stSSDDespatchUplift,
+ stSSDCountry,
+ stTimeChange,
+ stInclusiveVATCode,
+ stSSDArrivalsUplift,
+ stSpare2,
+ stOperator,
+ stImageFile,
+ stTempBinLocation,
+ stQtyPickedWOR,
+ stWOPWIPGL,
+ stWOPAssemblyTime,
+ stWOPROLeadTime,
+ stWOPAutoCalcTime,
+ stBOMAssemblyTime,
+ stWOPMinEconBuild,
+ stUsesBins,
+ stSalesWarrantyLengt,
+ stManWarrantyLength,
+ stSalesWarrantyUnits,
+ stManWarrantyUnits,
+ stPurchaseReturnQty,
+ stSalesReturnGL,
+ stRestockCharge,
+ stSpare3,
+ stSpare4,
+ stPurchaseReturnGL,
+ stRestockFlag,
+ stLastStockType,
+ stUser5,
+ stUser6,
+ stUser7,
+ stUser8,
+ stUser9,
+ stUser10,
+ stIsService,
+ ExtStockCode,
+ stIdxExtStockCode,
+ ProdImageText,
+ stUser11,
+ stUser12,
+ stUser13,
+ stUser14,
+ stUser15,
+ stUser16,
+ stTaricCode,
+ stSSDSalesGrossWt_1,
+ stSSDSalesGrossWt_2,
+ Spare5 from Stock
+
+""")
+
+# Fetch all results
+rows = cursor.fetchall()
+
+
+
+# Get column names from cursor description
+columns = [column[0] for column in cursor.description]
+
+# Function to clean and convert text to UTF-8
+def clean_text(value):
+    if isinstance(value, str):
+        value = value.encode("ISO-8859-1", errors="ignore").decode("utf-8", errors="ignore")  # Convert to UTF-8
+        value = re.sub(r'[\x00-\x1F\x7F]', '', value)  # Remove control characters
+    return value
+
+# Start CSV writing timer
+csv_start_time = time.time()
+
+# Write results to CSV file
+csv_file = 'Stock_Output_UTF8.csv'
+with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(columns)  # Write header row
+    
+    for row in rows:
+        writer.writerow([clean_text(value) for value in row])  # Write cleaned data rows
+

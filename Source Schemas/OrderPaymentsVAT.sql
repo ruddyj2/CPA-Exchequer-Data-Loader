@@ -23,7 +23,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "OrderPaymentsVAT" USING 'Trans\opvatpay.d
  "vpTimeCreated" LSTRING(7),
  "IdxTimeCreated" CHAR(6),
  "vpExclamationChar" CHAR(1),
- "vpSpare" CHAR(255) );SET TRUENULLCREATE = ON;
+ "vpSpare" CHAR(255) );SET TRUENULLCREATE = ON; 
 -- End Multi-Line Statement
 CREATE INDEX "ReceiptRefIdx" USING 0  ON "OrderPaymentsVAT" ( "IdxOrderRef", "IdxReceiptRef", "vpIdxLineOrderNo", "IdxDateCreated", "IdxTimeCreated" );
 CREATE INDEX "TransRefIdx" USING 1  ON "OrderPaymentsVAT" ( "IdxOrderRef", "IdxTransRef", "vpIdxLineOrderNo", "IdxDateCreated", "IdxTimeCreated" );

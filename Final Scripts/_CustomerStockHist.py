@@ -9,26 +9,57 @@ cursor = connection.cursor()
 
 
 cursor.execute("""
- select  bmRecType,
- bmIdxRecSub,
- bmSubType,
- IdxStockFolio,
- bmIdxStkLink,
- bmCompOrder,
- bmIdxBillLink,
- bmQtyUsed_1,
- bmQtyUsed_2,
- bmQtyCost_1,
- bmQtyCost_2,
- bmQtyCur,
- IdxStockCode,
- bmFreeIssue,
- bmTime,
- bmSpare from BillOfMaterials
+ select csIdxRecSub,
+ csIdxCode1,
+ csIdxCode2,
+ csIdxCode3,
+ idxAcCode,
+ idxStockCode,
+ idxStockFolio,
+ csSOQty,
+ --csLastDate,
+ csLineNo,
+ csLastPrice,
+ csLPCurr,
+ IdxJobCode,
+ IdxAnalCode,
+ --csLocCode,
+ csNomCode,
+ --csDepartment,
+ --csCostCentre,
+ csQty,
+ csNetValue,
+ csDiscount,
+ csVATCode,
+ csCost,
+ --csDesc1,
+ --csDesc2,
+ --csDesc3,
+ csDesc4,
+ csDesc5,
+ csDesc6,
+ csVAT,
+ csPrxPack,
+ csQtyPack,
+ csQtyMul,
+ csDiscCh,
+ csEntered,
+ csUsePack,
+ csShowCase,
+ csLineType,
+ csPriceMultiplier,
+ csInclusiveVATCode,
+ csSpare1,
+ csSpare2,
+ csSpare3,
+ csSpare4,
+ csSpare5 from CustomerStockHist
 """)
 
 # Fetch all results
 rows = cursor.fetchall()
+
+
 
 # Get column names from cursor description
 columns = [column[0] for column in cursor.description]
@@ -44,7 +75,7 @@ def clean_text(value):
 csv_start_time = time.time()
 
 # Write results to CSV file
-csv_file = 'BillOfMaterials_Output_UTF8.csv'
+csv_file = 'CustomerStockHist_Output_UTF8.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(columns)  # Write header row

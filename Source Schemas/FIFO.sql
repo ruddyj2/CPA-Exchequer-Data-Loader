@@ -21,7 +21,7 @@ SET TRUENULLCREATE = OFF;CREATE TABLE "FIFO" USING 'misc\exstkchk.dat' DCOMPRESS
  "IdxAcCode" CHAR(6),
  "fiLocation" CHAR(3),
  "fiCompanyRate_1" SMALLINT,
- "fiCompanyRate_2" INTEGER,
+ "fiCompanyRate_2" INTEGER, 
  "fiDailyRate_1" SMALLINT,
  "fiDailyRate_2" INTEGER,
  "fiUseORate" UTINYINT,

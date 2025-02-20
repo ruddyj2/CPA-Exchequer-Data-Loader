@@ -9,26 +9,60 @@ cursor = connection.cursor()
 
 
 cursor.execute("""
- select  bmRecType,
- bmIdxRecSub,
- bmSubType,
- IdxStockFolio,
- bmIdxStkLink,
- bmCompOrder,
- bmIdxBillLink,
- bmQtyUsed_1,
- bmQtyUsed_2,
- bmQtyCost_1,
- bmQtyCost_2,
- bmQtyCur,
- IdxStockCode,
- bmFreeIssue,
- bmTime,
- bmSpare from BillOfMaterials
+ 
+select snSerialNoLen,
+ snIdxSerialNo,
+ snBatchNoLen,
+ snIdxBatchNo,
+ snInOurRef,
+ snOutOurRef,
+ snSoldStatus,
+ snDateIn,
+ snCostPrice,
+ snSellingPrice,
+ snIdxStockFolio,
+ snDateOut,
+ snSoldABSLine,
+ snCostCurr,
+ snSalesCurr,
+ snBuyLine,
+ snIsBatchRec,
+ snBuyQty,
+ snQtyUsed,
+ snBatchSale,
+ snInLoc,
+ snOutLoc,
+ snCompanyRate_1,
+ snCompanyRate_2,
+ snDailyRate_1,
+ snDailyRate_2,
+ snInOrderRef,
+ snOutOrderRef,
+ snInOrderLine,
+ snOutOrderLine,
+ snNoteLineCount,
+ snNoteFolio,
+ snDateUseBy,
+ snUseORate,
+ snTriRate,
+ snTriEuro,
+ snTriInvert,
+ snTriFloat,
+ snTriSpare,
+ snChildNoteFolio,
+ snInBinCode,
+ snReturned,
+ snBatchReturnedQty,
+ snReturnOurRef,
+ snReturnLineNo,
+ snSpare from SerialBatchNumbers
+
 """)
 
 # Fetch all results
 rows = cursor.fetchall()
+
+
 
 # Get column names from cursor description
 columns = [column[0] for column in cursor.description]
@@ -44,7 +78,7 @@ def clean_text(value):
 csv_start_time = time.time()
 
 # Write results to CSV file
-csv_file = 'BillOfMaterials_Output_UTF8.csv'
+csv_file = 'SerialBatchNumbers_Output_UTF8.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(columns)  # Write header row
