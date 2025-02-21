@@ -1,13 +1,8 @@
 # CPA Exchequer Data Loader
 
-<<<<<<< HEAD
 ## Overview
 
 The CPA Exchequer Data Loader is a Python-based tool designed to automate the execution of various data extraction scripts for the CPA Exchequer system. The tool sequentially runs a series of Python scripts and logs their execution status and output.
-
-## Project Structure
-
-======
 
 ### Prerequisites
 
